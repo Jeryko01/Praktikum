@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="container">
+  <div class="header">
+    <h2>My To-Do List</h2>
+    <button id="Btn">Tambah +</button>
+  </div>
+  <ul id="List"></ul>
+  <p id="nama">&copy; 2472032 - Jeryko Farelin Heliandra</p>
+</div>
+
+<style>
+    body {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #F5F5F5;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100vh;
+    margin: 0;
+    padding-top: 10px;
+    }
+
+    .container {
+    background-color: #4A90E2;
+    width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    }
+
+    .header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    h2 {
+    color: white;
+    margin: 0;
+    font-size: 18px;
+    padding-left: 20px;
+    }
+
+    #Btn {
+    background-color: #50C878;
+    color: white;
+    padding: 6px 14px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    }
+
+    ul {
+    list-style-type: disc;
+    padding-left: 20px;
+    width: 100%;
+    }
+
+    li {
+    color: white;
+    margin-bottom: 8px;
+    cursor: pointer;
+    margin-left: 40px;
+    }
+
+
+    li.completed {
+    text-decoration: line-through;
+    }
+
+    #nama {
+    color: white;
+    font-size: 12px;
+    margin: 0;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    }
+  </style>
+
+  <script>
+    const Btn = document.getElementById("Btn");
+    const List = document.getElementById("List");
+
+    Btn.addEventListener("click", function() {
+      const task = prompt("Masukkan tugas yang harus dilakukan:");
+      if (task) {
+        const li = document.createElement("li");
+        li.textContent = task;
+
+        li.addEventListener("click", function() {
+          const confirmDone = confirm(`Apakah tugas "${task}" sudah selesai?`);
+          if (confirmDone) {
+            li.classList.toggle("completed");
+          }
+        });
+
+        List.appendChild(li);
+      }
+    });
+  </script>
+</body>
+</html>

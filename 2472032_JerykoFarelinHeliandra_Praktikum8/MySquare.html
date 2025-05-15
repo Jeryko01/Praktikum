@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <h3><b>Persegi Buatanmu</b></h3>
+        <div id="kotak">Basic Web Programming</div>
+        <p>&copy; 2472032 - Jeryko Farelin Heliandra</p>
+    </div>
+    <style>
+        .container{
+        text-align: center;
+        }
+
+        #kotak{
+            border: 1px solid black;
+            background-color: red;
+            width: 200px;
+            height: 150px;
+            color: white;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            justify-content: center;
+            
+        }
+        #kotak > p{
+            text-align: center;
+        }
+    </style>
+    <script>
+        let divKotak = document.getElementById("kotak");
+        let borderWidth = prompt("Border persegi (misal: 1):");
+        divKotak.style.border = borderWidth + "px solid black";
+        let height = prompt("Tinggi persegi(px):");
+        divKotak.style.height = height + "px";
+        let width = prompt("lebar persegi(px):");
+        divKotak.style.width = width + "px";
+        divKotak.style.backgroundColor = prompt("warna persegi(misal: red, blue, #00ff00):");
+        divKotak.innerHTML = prompt("isi persegi(misal: Hello World):"); 
+    </script>
+</body>
+</html>

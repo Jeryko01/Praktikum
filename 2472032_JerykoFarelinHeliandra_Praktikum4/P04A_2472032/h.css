@@ -1,0 +1,31 @@
+.title-page{
+    color:white;
+    border-style: hidden;
+    border-width: 5px 20px;
+    background: #00a3a8;
+    font-family: "Segoe UI"; 
+}
+
+body{
+    font-family: "segoe UI";
+}
+
+.container{
+    max-width: 1000px;
+    margin:auto;
+}
+
+.paragraph{
+    border: solid #00a3a8;
+    max-width: 1000px;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.h4{
+    font-size: 20px;
+}
+
+.list{
+    margin-left: 100px ;
+}

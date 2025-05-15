@@ -1,0 +1,141 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+@media only screen and (max-width: 768px) {
+    .si {
+        grid-template-columns: repeat(2, 1fr);
+        gap:10px;
+        margin: auto;
+        width: 100%;           
+    }
+    .sidebar{
+        display: none;
+    }
+
+}
+
+@media only screen and (max-width: 480px) {
+    .si {
+        grid-template-columns: 1fr;
+    }
+    .sidebar{
+        display: none;
+    }
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+.sidebar {
+    width: 250px;
+    background: #1b1e23;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.sidebar ul li a:hover, .sidebar ul li a.live {
+    background: #34495e;
+}
+
+.sidebar ul li a.live {
+    background: grey;
+    color: white;
+}
+
+.profile{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logout {
+    margin-top: auto;
+    background: red;
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.main {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #ecf0f1;
+}
+
+.head{
+    background: #2980b9;
+    color: white;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+.ring {
+    background: white;
+    padding: 20px;
+    text-align: left;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.ring span {
+    font-size: 1.5em;
+    font-weight: bold;
+    color:#2980b9;
+}
+
+.h{
+    text-align: center;
+} 
+
+.si {
+    padding: 20px;
+}
+
+.si h3 {
+    margin-bottom: 20px;
+}
+
+.isi {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+

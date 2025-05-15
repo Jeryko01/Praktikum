@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div class="title">Pomodoro</div>
+<div class="timer-container">
+  <div class="mode">
+    <button onclick="switchMode(0)">Pomodoro</button>
+    <button onclick="switchMode(1)">Short Break</button>
+  </div>
+  <div id="time">25:00</div>
+  <div class="control">
+    <button id="startResetBtn">START</button>
+  </div>
+</div>
+<div class="motivationp">Focus pocus!</div>
+<div class="motivations">Rest time!!</div>
+
+<style>
+   @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+
+    body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    background-color: #894682;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    }
+
+    .title {
+    position: absolute;
+    top: 20px;
+    left: 300px;
+    font-weight: 600;
+    }
+
+    .timer-container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 40px 30px;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid white;
+    width: 240px;
+    margin-top: -300px;
+    }
+
+    .mode {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    }
+
+    .mode button {
+    background: none;
+    border: none;
+    color: white;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    margin: 0 5px;
+    }
+
+    #time {
+    font-size: 60px;
+    margin: 20px 0;
+    }
+
+    .control button {
+    padding: 10px 25px;
+    font-size: 16px;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: white;
+    color: black;
+    cursor: pointer;
+    }
+
+    .motivationp {
+    margin-top: 15px;
+    font-size: 14px;
+    }
+    .motivations {
+    margin-top: 15px;
+    font-size: 14px;
+    }
+  </style>
+
+  <script>
+    let timer;
+    let sisaw = 1500; 
+    let Running = false;
+    let ModeNow = 0; 
+
+    const timeDisplay = document.getElementById("time");
+    const startResetBtn = document.getElementById("startResetBtn");
+
+    const durasi = [1500, 300]; 
+    const colors = ["#894682", "#4988BB"];
+    const labels = ["Pomodoro", "Short Break"];
+
+    function formatTime(seconds) {
+      const m = String(Math.floor(seconds / 60)).padStart(2, '0');
+      const s = String(seconds % 60).padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    function updateDisplay() {
+        timeDisplay.textContent = formatTime(sisaw);
+        document.body.style.backgroundColor = colors[ModeNow];
+        
+        if (ModeNow === 0) {
+            motivationPomodoro.style.display = "block";
+            motivationBreak.style.display = "none";
+        } else {
+            motivationPomodoro.style.display = "none";
+            motivationBreak.style.display = "block";
+        }
+    }
+    const motivationPomodoro = document.querySelector(".motivationp");
+    const motivationBreak = document.querySelector(".motivations");
+
+
+    function startTimer() {
+      if (Running) return;
+      Running = true;
+      startResetBtn.textContent = "Reset";
+
+      timer = setInterval(() => {
+        sisaw--;
+        updateDisplay();
+
+        if (sisaw <= 0) {
+          clearInterval(timer);
+          alert("Waktu habis!");
+          resetTimer();
+        }
+      }, 1000);
+    }
+
+    function resetTimer() {
+      clearInterval(timer);
+      Running = false;
+      sisaw = durasi[ModeNow];
+      updateDisplay();
+      startResetBtn.textContent = "Start";
+    }
+
+    function switchMode(newMode) {
+      clearInterval(timer);
+      Running = false;
+      ModeNow = newMode;
+      sisaw = durasi[newMode];
+      updateDisplay();
+      startResetBtn.textContent = "Start";
+    }
+
+
+    startResetBtn.addEventListener("click", () => {
+      if (Running) {
+        resetTimer();
+      } else {
+        startTimer();
+      }
+    });
+
+    updateDisplay();
+  </script>
+</body>
+</html>

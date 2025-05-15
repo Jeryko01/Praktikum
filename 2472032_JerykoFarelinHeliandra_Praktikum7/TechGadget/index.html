@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TechGadget Hub</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="navbar-brand nav-link" href="#">TechGadget Hub</a></li>
+                <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+                <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#prod" role="button" data-bs-toggle="dropdown">Products</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#Smart Glasses">Smartphones</a></li>
+                    <li><a class="dropdown-item" href="#Foldable Tablet">Laptops</a></li>
+                    <li><a class="dropdown-item" href="#Drone">Wearables</a></li>
+                </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#" onclick="toggleAbout()">About</a></li>
+            </ul>
+            <button class="btn btn-outline-light" onclick="showToast()">Enable Notifications</button>
+            </div>
+        </div>
+    </div>
+    </nav>
+    <div id="about">
+        <button class="btn-close float-end" aria-label="Close" onclick="toggleAbout()"></button>
+        <h5 class="bold">About TechGadget Hub</h5>
+        <p class="par pt-3">Founded in 2023, TechGadget Hub is dedicated to bringing you the most innovative technology products from around the world. 
+        Our team of tech enthusiasts tests every product to ensure it meets our high standards.</p>
+        <p class="bold">Our Team</p>
+        <p><b>2472032 - Jeryko Farelin Heliandra</b><br>CEO</p>
+        </div>
+        <div class="toast-container">
+            <div id="liveToast" class="toast align-items-center text-dark bg-light border shadow" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <strong class="me-auto">TechGadget Hub</strong>
+                <small class="text-muted">Just now</small>
+                <button type="button" class="btn-close ms-2 mb-1" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                Notification permissions granted! We'll alert you about new tech releases and exclusive deals.
+            </div>
+            </div>
+        </div>
+        <script>
+            function showToast() {
+                const toast = new bootstrap.Toast(document.getElementById('liveToast'));
+                toast.show();
+            }
+            function toggleAbout() {
+                document.getElementById('about').classList.toggle('show');
+            }
+        </script>
+    <div class="hero">
+    <h1>Discover Cutting-Edge Technology</h1>
+    <p>Explore the latest gadgets that will revolutionize your digital life</p>
+    </div>
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Featured Gadgets</h2>
+        <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+            <img src="" class="card-img-top" alt="Smart Glasses">
+            <div class="card-body">
+                <h5 class="card-title" id="Smart Glasses">AR Vision Glasses</h5>
+                <p class="card-text">Augmented reality glasses with 8-hour battery life and voice control.</p>
+                <button class="btn btn-primary" type="button">View Details</button>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+            <img src="" class="card-img-top" alt="Foldable Tablet">
+            <div class="card-body">
+                <h5 class="card-title" id="Foldable Tablet">FlexiTab Pro</h5>
+                <p class="card-text">12.6" foldable tablet with ultra thin glass and 120Hz refresh rate.</p>
+                <button class="btn btn-primary" type="button">View Details</button>
+            </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+            <img src="" class="card-img-top" alt="Drone">
+            <div class="card-body">
+                <h5 class="card-title" id="Drone"> SkyEye 360</h5>
+                <p class="card-text">4K drone with 5 mile range and AI poweres obstacle avoidance.</p>
+                <button class="btn btn-primary" type="button">View Details</button>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    <div class="container mb-5">
+        <h3 class="text-center mb-3">Tech Questions</h3>
+        <div class="accordion" id="faqAccordion">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                What's the return policy?
+            </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse active" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+                We offer a 30-day no questions asked return policy on all our products. If you're not satisfied, simply return the item in its original condition for a full refund.
+            </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                Do you offer international shipping?
+            </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+                Yes, we ship to over 150 countries worldwide. Shipping costs and delivery times vary depending on your location.
+            </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                How do I contact customer support?
+            </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+                Our customer support team is available 24/7 via live chat, email (support@techgadgethub.com) or phone (1-800-TECH-GADGET). 
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</body>
+</html>

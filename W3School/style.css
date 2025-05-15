@@ -1,0 +1,153 @@
+body{
+    margin: 0px;
+    font-family: verdana;
+}
+.navbar{
+    width: 100%;
+    text-align: center;
+    background-color: #282B30;
+    color: white;
+    padding: 0px;
+    margin: 0px 0px 0px 0px;
+    border-collapse: collapse;
+    height: 50px;
+    
+}
+td{
+    width: 33%;
+}
+
+a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+a:hover{
+    background-color: #1E2124;
+    display: block;
+    height: 100%;
+    padding: 14.5px;
+}
+a:active{
+    background-color: #7289DA;
+}
+
+.table{
+    width: 100%;
+    text-align: center;
+    background-color: #D9EEE1;
+    padding: 140px 0px ;
+}
+
+.table2{
+    width: 100%;
+    text-align: center;
+    background-color: #fff4a3;
+    padding: 140px 0px ;
+}
+
+.table3{
+    width: 100%;
+    text-align: center;
+    background-color: #f3ecea;
+    padding: 140px 0px ;
+}
+
+
+.bold{
+    font-weight: bold;
+    font-size: 70px;
+    margin-bottom: 20px;
+}
+
+.a1{
+    width: 200px;
+    height: 40px;
+    padding: 10px 20px;
+    margin: 10px 0px 10px 0px;
+    text-align: center;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+    color: white;
+    background-color: #04AA6D;
+}
+
+.a2{
+    width: 200px;
+    height: 40px;
+    padding: 10px 20px;
+    margin: 10px 0px 10px 0px;
+    text-align: center;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+    color: white;
+    background-color: #000000;
+}
+
+.a3{
+    width: 200px;
+    height: 40px;
+    padding: 10px 20px;
+    margin: 10px 0px 10px 0px;
+    text-align: center;
+    border: none;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 12px;
+    color: black;
+    background-color: pink;
+}
+
+.a4{
+    width: 10px;
+    height: 40px;
+    text-align: center;
+    border-radius: 9999px;
+    cursor: pointer;
+    font-size: 12px;
+    color: white;
+    background-color: #04AA6D;
+    padding: 10px 20px 10px 20px;
+    margin: 10px 0px 0px 0px;
+}
+
+
+.tk{
+    height: 300px;
+    padding: 0px 15px 40px 15px ;
+    text-align: left;
+    border-radius: 5px;
+    font-size: 20px;
+    color: white;
+    background-color: #38444d;
+    max-width: 70%;
+}
+
+.tkd{
+    width: 700px;
+    height: 00px;
+    color: skyblue;
+    background-color: #1E2124;
+    font-size: 14px;
+    font-family: 'Courier New';
+    padding: 0px 0px 10px 0px;
+    margin: 0px 0px 00px 0px;
+    max-width: 90%;
+}
+
+.text{
+    padding-bottom: 15px;
+    padding-top: 10px;
+}
+
+.margin{
+    padding: 20px 0px 0px 0px;
+}

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="script.js"></script>
+</head>
+<body>
+    <div id="quiz-container">
+        <h1 class="head"><b>Welcome to the Math Quiz!</b></h1>
+        <p class="par">Click the  button bellow to start solving random math problems. Type <br>"exit" or press cancel to stop</p>
+        <button type="submit" onclick="startQuiz()" id="submit">Start Practicing</button>
+        <p id="result">Final score</p>
+        <p id="date"></p>
+    </div>
+    <style>
+        body{
+            text-align: center;
+            font-style: Arial;
+            background-color: #e3f2fd;
+        }
+        .head{
+            margin-bottom: 0px;
+        }
+        .par{
+            margin-bottom: 30px;
+        }
+        #quiz-container{
+            width: 500px;
+            height: 300px;
+            margin: auto;
+            padding: 30px 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            margin-top: 200px ;
+            border-radius: 15px;
+            box-shadow: 3px 3px 10px 3px #888888;
+        }
+        #submit{
+            border: none;
+            width: 150px;
+            height: 30px;
+            border-radius: 4px;
+            background-color: #3498db;
+            color: white;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        #submit:hover {
+            background-color: #2980b9 ;
+        }
+
+        #result{
+            display: none;
+            margin: 5px;
+        }
+        #date{
+            display: none;
+            margin: 0px;
+        }
+    </style>
+</body>
+</html>

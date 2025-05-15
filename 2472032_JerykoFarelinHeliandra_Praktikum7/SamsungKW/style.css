@@ -1,0 +1,12 @@
+.promo{
+    text-align: center;
+    margin: 40px;
+}
+
+.promo p{
+    font-weight:500;
+}
+
+.nav-link{
+    color: black !important;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body id="huh">
+    <div id="kotak">    
+        <h3><b>Color Generator </b></h3>
+        <button id="te" type="button" onclick="run()">Generator</button>
+        <p id="color"></p>
+    </div>
+
+    <style>
+        body{
+            text-align: center;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #kotak{
+            border: 1px solid black;;
+            width: 200px;
+            height: 100px;
+            margin: auto;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            
+        }
+
+        #te{
+            margin: 0px;
+        }
+    </style>
+    <script>
+        function run(){
+            let num = "1234567890ABCDEF";
+            let crash = "#";
+            for (let i=0; i < 6; i++){
+                crash += num[Math.floor(Math.random() * 16)];
+            }
+            let latar = document.getElementById("huh");
+            huh.style.backgroundColor = crash;
+            let colorText = document.getElementById("color");
+            colorText.textContent = crash;
+        }
+    </script>
+</body>
+</html>
