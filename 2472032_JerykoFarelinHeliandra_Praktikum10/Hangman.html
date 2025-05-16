@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Hangman</title>
 </head>
 
 <body>
   <div class="container">
     <div class="image-section">
       <div class="containergem">
-        <img id="Imagem" src="./img/full.png" alt="Hangman">
+        <img id="Imagem" src="./img/10.jpg" alt="Hangman">
       </div>
       <div id="lives">Lives : 10</div>
     </div>
@@ -26,7 +26,7 @@
     </div>
   </div>
 
-<style>
+  <style>
     body {
       background-color: lightblue;
       font-family: Arial, sans-serif;
@@ -54,7 +54,7 @@
       overflow: hidden;
     }
 
-    .coontainergem img {
+    .containergem img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -97,12 +97,19 @@
       color: red;
     }
 
-    input[type="text"] {
+    #inputContainer {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    input {
       padding: 8px;
       font-size: 18px;
       width: 40px;
       text-align: center;
-      margin-right: 10px;
     }
 
     button {
@@ -113,122 +120,91 @@
   </style>
 
   <script>
-    var answers = ["PYTHON", "JAVASCRIPT", "TAILWIND", "REACT", "LARAVEL"];
-    var clues = [
+    var listjwb = ["PYTHON", "JAVASCRIPT", "TAILWIND", "REACT", "LARAVEL"];
+    var clue = [
       "A versatile programming language named after a snake, loved for its simplicity.",
-      "The language that brings interactivity to websites, often abbreviated as JS.",
-      "A utility-first CSS framework for rapidly building custom designs.",
-      "A JavaScript library for building dynamic user interfaces, created by Facebook.",
-      "A PHP framework known for elegant syntax and robust web development tools."
+        "The language that brings interactivity to websites, often abbreviated as JS.",
+        "A utility-first CSS framework for rapidly building custom designs.",
+        "A JavaScript library for building dynamic user interfaces, created by Facebook.",
+        "A PHP framework known for elegant syntax and robust web development tools.",
+
     ];
 
-    var answer = "";
-    var answer_ = [];
-    var lives = 10;
+    var jwbn = "";
+    var jwbinp = [];
+    var hidup = 10;
 
     var clueEl = document.getElementById("clue");
     var wordEl = document.getElementById("word");
-    var livesEl = document.getElementById("lives");
-    var messageEl = document.getElementById("message");
-    var imageEl = document.getElementById("Imagem");
-    var guessInput = document.getElementById("guess");
-    var guessBtn = document.getElementById("guessBtn");
-    var inputContainer = document.getElementById("inputContainer");
+    var nyawa = document.getElementById("lives");
+    var pesan = document.getElementById("message");
+    var gbr = document.getElementById("Imagem");
+    var tebak = document.getElementById("guess");
+    var tomtbk = document.getElementById("guessBtn");
+    var inputc = document.getElementById("inputContainer");
 
-    function generate() {
-      var index = Math.floor(Math.random() * answers.length);
-      answer = answers[index];
-      answer_ = [];
-      for (var i = 0; i < answer.length; i++) {
-        answer_.push("_");
+    function acakKata() {
+      var index = Math.floor(Math.random() * listjwb.length);
+      jwbn = listjwb[index];
+      jwbinp = [];
+      for (var i = 0; i < jwbn.length; i++) {
+        jwbinp.push("_");
       }
-      lives = 10;
-      messageEl.textContent = "";
-      messageEl.className = "";
-      inputContainer.style.display = "block";
-      guessInput.disabled = false;
-      guessBtn.disabled = false;
-      updateDisplay();
+      hidup = 10;
+      pesan.textContent = "";
+      pesan.className = "";
+      inputc.style.display = "flex";
+      tebak.disabled = false;
+      tomtbk.disabled = false;
+      updateTampilan();
     }
 
-    function updateDisplay() {
-      clueEl.textContent = "Clue: " + clues[answers.indexOf(answer)];
-      wordEl.textContent = answer_.join(" ");
-      livesEl.textContent = "Lives : " + lives;
-      if (lives === 0) {
-        imageEl.src = "./img/dead.png";
-      } else {
-        imageEl.src = "./img/full.png";
-      }
+    function updateTampilan() {
+      clueEl.textContent = "Clue: " + clue[listjwb.indexOf(jwbn)];
+      wordEl.textContent = jwbinp.join(" ");
+      nyawa.textContent = "Lives : " + hidup;
+      gbr.src = `./img/${hidup}.jpg`;
     }
 
     function checkWin() {
-      var stillEmpty = false;
-      for (var i = 0; i < answer_.length; i++) {
-        if (answer_[i] === "_") {
-          stillEmpty = true;
-        }
-      }
+      var masihKosong = jwbinp.includes("_");
 
-      if (!stillEmpty) {
-        messageEl.textContent = "Kamu Menang!";
-        messageEl.className = "win";
-        inputContainer.style.display = "none";
-      } else {
-        if (lives <= 0) {
-          messageEl.textContent = "Kamu Kalah!";
-          messageEl.className = "lose";
-          wordEl.textContent = answer.split("").join(" ");
-          inputContainer.style.display = "none";
-        }
+      if (!masihKosong) {
+        pesan.textContent = "Kamu Menang!";
+        pesan.className = "win";
+        inputc.style.display = "none";
+      } else if (hidup <= 0) {
+        pesan.textContent = "Kamu Kalah!";
+        pesan.className = "lose";
+        wordEl.textContent = jwbn.split("").join(" ");
+        inputc.style.display = "none";
       }
     }
 
     function checkAnswer() {
-      var letter = guessInput.value.toUpperCase();
-      guessInput.value = "";
+      var huruf = tebak.value.toUpperCase();
+      tebak.value = "";
 
-      if (letter === "") {
-        return;
-      }
+      if (huruf === "" || huruf.length !== 1 || hidup <= 0) return;
+      if (!jwbinp.includes("_")) return;
 
-      if (letter.length !== 1) {
-        return;
-      }
-
-      if (lives <= 0) {
-        return;
-      }
-
-      var stillEmpty = false;
-      for (var i = 0; i < answer_.length; i++) {
-        if (answer_[i] === "_") {
-          stillEmpty = true;
-        }
-      }
-      if (!stillEmpty) {
-        return;
-      }
-
-      var found = false;
-      for (var j = 0; j < answer.length; j++) {
-        if (answer[j] === letter && answer_[j] === "_") {
-          answer_[j] = letter;
-          found = true;
+      var ditemukan = false;
+      for (var j = 0; j < jwbn.length; j++) {
+        if (jwbn[j] === huruf && jwbinp[j] === "_") {
+          jwbinp[j] = huruf;
+          ditemukan = true;
         }
       }
 
-      if (!found) {
-        lives = lives - 1;
-      }
+      if (!ditemukan) hidup--;
 
-      updateDisplay();
+      updateTampilan();
       checkWin();
     }
 
-    window.addEventListener("load", generate);
-    guessBtn.addEventListener("click", checkAnswer);
-    guessInput.addEventListener("keypress", function(e) {
+    window.addEventListener("load", acakKata);
+    tomtbk.addEventListener("click", checkAnswer);
+    tebak.addEventListener("keypress", function(e) {
       if (e.key === "Enter") {
         checkAnswer();
       }

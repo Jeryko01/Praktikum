@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Game Hangman</title>
+  <style>
+    body {
+      background-color: lightblue;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .image-section {
+      width: 200px;
+    }
+
+    .image-section img {
+      width: 100%;
+    }
+
+    #word {
+      font-size: 32px;
+      letter-spacing: 10px;
+      margin-bottom: 20px;
+    }
+
+    #clue, #lives, #message {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .win { color: green; }
+    .lose { color: red; }
+
+    input[type="text"] {
+      width: 40px;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    button {
+      padding: 8px 16px;
+      font-size: 16px;
+      margin-left: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Game Hangman</h2>
+  <div class="container">
+    <div class="image-section">
+      <img id="hangmanImg" src="./img/0.jpg" alt="Hangman Image">
+      <div id="lives">Lives: 10</div>
+    </div>
+    <div class="game-section">
+      <div id="clue">Clue: -</div>
+      <div id="word">_ _ _ _ _</div>
+      <input type="text" id="guess" maxlength="1">
+      <button id="checkBtn">Check</button>
+      <div id="message"></div>
+    </div>
+  </div>
+
+  <script>
+    var answers = ["PYTHON", "JAVASCRIPT", "TAILWIND", "REACT", "LARAVEL"];
+    var clues = [
+      "Bahasa pemrograman dinamai dari ular.",
+      "Bahasa untuk web interaktif, sering disingkat JS.",
+      "Framework CSS utility-first.",
+      "Library untuk membangun UI dari Facebook.",
+      "Framework PHP dengan sintaks elegan."
+    ];
+
+    var index = Math.floor(Math.random() * answers.length);
+    var answer = answers[index];
+    var clue = clues[index];
+    var answer_ = [];
+    var lives = 10;
+
+    for (var i = 0; i < answer.length; i++) {
+      answer_.push("_");
+    }
+
+    var clueEl = document.getElementById("clue");
+    var wordEl = document.getElementById("word");
+    var livesEl = document.getElementById("lives");
+    var messageEl = document.getElementById("message");
+    var input = document.getElementById("guess");
+    var checkBtn = document.getElementById("checkBtn");
+    var img = document.getElementById("hangmanImg");
+
+    clueEl.textContent = "Clue: " + clue;
+    wordEl.textContent = answer_.join(" ");
+    livesEl.textContent = "Lives: " + lives;
+
+    function updateTampilan() {
+      wordEl.textContent = answer_.join(" ");
+      livesEl.textContent = "Lives: " + lives;
+
+      // Gambar berubah sesuai jumlah nyawa yang hilang
+      var imgIndex = 10 - lives;
+      if (imgIndex >= 0 && imgIndex <= 10) {
+        img.src = "./img/" + imgIndex + ".jpg";
+      }
+    }
+
+    function checkAnswer() {
+      var huruf = input.value.toUpperCase();
+      input.value = "";
+
+      if (huruf === "" || huruf.length !== 1 || lives <= 0) return;
+      if (!answer_.includes("_")) return;
+
+      var ditemukan = false;
+      for (var i = 0; i < answer.length; i++) {
+        if (answer[i] === huruf && answer_[i] === "_") {
+          answer_[i] = huruf;
+          ditemukan = true;
+        }
+      }
+
+      if (!ditemukan) lives--;
+
+      updateTampilan();
+      checkWin();
+    }
+
+    function checkWin() {
+      if (!answer_.includes("_")) {
+        messageEl.textContent = "Kamu Menang!";
+        messageEl.className = "win";
+        checkBtn.style.display = "none";
+        input.style.display = "none";
+      } else if (lives <= 0) {
+        messageEl.textContent = "Kamu Kalah! Jawaban: " + answer;
+        messageEl.className = "lose";
+        checkBtn.style.display = "none";
+        input.style.display = "none";
+      }
+    }
+
+    checkBtn.addEventListener("click", checkAnswer);
+  </script>
+</body>
+</html>
