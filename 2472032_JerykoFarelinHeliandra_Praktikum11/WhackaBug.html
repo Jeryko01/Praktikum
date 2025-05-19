@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Whack a Bug</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: white;
+        }
+        .bug {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+        }
+        #info {
+            position: fixed;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 18px;
+            color: black;
+            text-align: center;
+            
+        }
+        #finalscore {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 40px;
+            color: white;
+        }
+        p{
+            margin-bottom: 0px;
+            margin-top: 0px;
+        }
+    </style>
+    <script>
+    $(document).ready(function() {
+        let timeLeft = 5;
+        let score = 0;
+        let appear;
+        let countdown;
+
+        function spawn() {
+            let bug = $('<img src="./Bug-PNG-2.png" class="bug">');
+            let x = Math.random() * (window.innerWidth - 40);
+            let y = Math.random() * (window.innerHeight - 40);
+            bug.css({ top: y + 'px', left: x + 'px' });
+            $('body').append(bug);
+
+            bug.click(function() {
+                score += 1;
+                $('#score').text(score);
+                $(this).remove();
+            });
+        }
+        countdown = setInterval(function() {
+            timeLeft -= 1;
+            $('#time').text(timeLeft);
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                clearInterval(appear);
+                $('.bug').remove();
+
+                $('body').css('background-color', 'black');
+                $('#info').hide();
+                $('#finalscore').text('Final Score: ' + score).show();
+            }
+        }, 1000);
+        appear = setInterval(spawn, 1000);
+    });
+</script>
+</head>
+<body>
+<div id="info">
+    <p>Time Left: <span id="time">5</span>s</p>
+    <p>Score: <span id="score">0</span></p>
+</div>
+<div id="finalscore"></div>
+</body>
+</html>

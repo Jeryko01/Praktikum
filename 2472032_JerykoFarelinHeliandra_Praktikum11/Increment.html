@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Increment Box</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .box {
+            width: 60px;
+            height: 60px;
+            display: inline-block;
+            margin: 10px;
+            border: 4px solid black;
+            font-size: 20px;
+            line-height: 60px;
+            font-weight: bold;
+            background-color: white;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        $(document).ready(function() {
+            $(".box").click(function() {
+                let valueNow = parseInt($(this).text());
+                valueNow += 1;
+                $(this).text(valueNow);
+                $(this).css("background-color", "green");
+            });
+            $(".box").on("contextmenu", function(event) {
+                event.preventDefault(); 
+
+                let valueNow = parseInt($(this).text());
+                if (valueNow > 0) {
+                    valueNow -= 1;
+                    $(this).text(valueNow);
+                }
+
+                if (valueNow === 0) {
+                    $(this).css("background-color", "white");
+                } else {
+                    $(this).css("background-color", "red");
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="box">0</div>
+    <div class="box">0</div>
+    <div class="box">0</div>
+    <div class="box">0</div>
+    <div class="box">0</div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stack</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        #container{
+            text-align: center;
+        }
+        h2{
+            margin: 10px;
+        }
+        #push{
+            background-color: #4caf50;
+            color: white;
+            border-radius: 3px;
+            border: none;
+            margin-right: 7px;
+            cursor: pointer;
+            padding: 8px 13px 8px 13px;
+            margin-top: 0px;
+        }
+        #pop{
+            background-color: #4caf50;
+            color: white;
+            border-radius: 3px;
+            border: none;
+            padding: 8px 13px 8px 13px;
+            margin-left: 7px;
+            cursor: pointer;
+            margin-top:0px ;
+        }
+
+        .isi{
+            
+            display: flex;
+            background-color: #7bdff2;
+            color: #333333;
+            width: 250px;
+            height: 30px;
+            border-radius:3px ;
+            margin: auto;
+            margin-top: 15px;
+            justify-content: center;
+            padding: 7px 10px 0px 10px;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            let array= []
+            function show(){
+                $(".list").empty();
+                for (let i=array.length-1; i>=0; i--){
+                    let inArray = $("<div class='isi'>" + array[i] + "</div>").hide();
+                    inArray.fadeIn(500)
+                    $(".list").append(inArray);
+                }
+            }
+            $("#push").click(function(){
+                let input = prompt("Masukkan data untuk push:");
+                if(input !== null && input !== ""){
+                    array.push(input);
+                    show();
+                }
+            });
+            $("#pop").click(function(){
+                if(array.length > 0){
+                    array.pop();
+                    show();
+                } 
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="container">
+    <h2>Data Structure - Stack Demo</h2>
+    <button id="push">Push</button>
+    <button id="pop">Pop</button>
+    <div class="list"></div>
+    </div>
+</body>
+</html>
