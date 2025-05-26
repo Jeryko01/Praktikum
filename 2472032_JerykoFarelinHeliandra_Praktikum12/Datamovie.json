@@ -1,0 +1,45 @@
+[
+    {
+        "img": "./img/imgcinema/endgame.jpg",
+        "title": "The Avengers Endgame",
+        "genre": "Science Fiction, Action"
+    },
+    {
+        "img": "./img/imgcinema/batman.jpg",
+        "title": "Batman vs Superman",
+        "genre": "Action, Science Fiction"
+    },
+    {
+        "img": "./img/imgcinema/jumbo.jpg",
+        "title": "Jumbo",
+        "genre": "Family, Animation"
+    },
+    {
+        "img": "./img/imgcinema/jurrasic.jpg",
+        "title": "Jurrasic Park",
+        "genre": "Science Fiction, Action, Adventure"
+    },
+    {
+        "img": "./img/imgcinema/starwars.jpg",
+        "title": "Star Wars",
+        "genre": "Science Fiction, Action"
+    },
+    {
+        "img": "./img/imgcinema/maze.jpg",
+        "title": "The Maze Runner",
+        "genre": "Action, Adventure, Science Fiction"
+    },
+    {
+        "img": "./img/imgcinema/kimi.png",
+        "title": "Your Name",
+        "genre": "Animation, Romance, Drama"
+    },
+    {
+        "img": "./img/imgcinema/gula.jpg",
+        "title": "Pabrik Gula",
+        "genre": "Horror, Mystery, Tragedy"
+    }
+    
+    
+
+]

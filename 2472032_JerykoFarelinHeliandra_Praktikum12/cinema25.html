@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cinema 25</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #f4f4f4 60%, #e0e7ff 100%);
+      min-height: 100vh;
+      margin: 0;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.2)), url('./img/imgcinema/cinema.jpg') center/cover no-repeat;
+      height: 350px;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .head {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 40px;
+    }
+
+    header p {
+      color: #ffe066;
+      margin: 10px 0 0;
+      font-size: 20px;
+    }
+
+    #dbtn {
+      background-color: #fff;
+      display: flex;
+      justify-content: center;
+      padding: 30px 0 10px;
+    }
+
+    #btn {
+      background-color: #1b9c85;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #boxcontainer {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px;
+      gap: 20px;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 200px;
+      overflow: hidden;
+      text-align: center;
+      transition: transform 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.03);
+    }
+
+    .card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 15px 15px 0 0;
+    }
+
+    .card h3 {
+      color: #2d3142;
+      margin: 10px 0 5px;
+    }
+
+    .card p {
+      color: #1b9c85;
+      margin-bottom: 10px;
+    }
+
+    footer {
+      background-color: #2d3142;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      margin-top: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="head">
+      <h1>Cinema 25</h1>
+      <p>Now Showing</p>
+    </div>
+  </header>
+
+  <div id="dbtn">
+    <button id="btn">See Movies</button>
+  </div>
+
+    <div id="boxcontainer"></div>
+  
+  <footer>
+    <p>© 2025 - Cinema 25 - 2472032 Jeryko Farelin Heliandra</p>
+  </footer>
+
+  <script>
+    document.getElementById("btn").addEventListener("click", () => {
+      fetch("Datamovie.json")
+        .then(respon => respon.json())
+        .then(dataFilm => {
+          const boxcontainer = document.getElementById("boxcontainer");
+          boxcontainer.innerHTML = ""; 
+          
+          dataFilm.forEach(film => {
+            const kartuFilm = document.createElement("div");
+            kartuFilm.classList.add("card");
+
+            kartuFilm.innerHTML = `
+              <img src="${film.img}" alt="${film.title}">
+              <h3>${film.title}</h3>
+              <p>${film.genre}</p>
+            `;
+
+            boxcontainer.appendChild(kartuFilm);
+          });
+          document.getElementById("dbtn").style.display = "none";
+        })
+        });
+  </script>
+</body>
+</html>
