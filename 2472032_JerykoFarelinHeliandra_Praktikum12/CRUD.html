@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CRUD</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f8;
+      padding: 30px;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 30px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-bottom: 10px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group input {
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    .form-group:nth-child(1) {
+      flex: 2;
+    }
+
+    .form-group:nth-child(2), .form-group:nth-child(3) {
+      flex: 1;
+    }
+
+    textarea {
+      resize: vertical;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      width: 100%;
+      margin-bottom: 10px;
+    }
+
+    .textarea-group {
+      flex: 1 1 100%;
+      display: flex;
+      flex-direction: column;
+      max-width: 100%;
+      padding-right: 15px;
+    }
+
+    .btn-tambah, .btn-update {
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      align-self: flex-end;
+    }
+
+    .btn-edit {
+      background-color: #f39c12;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+
+    .btn-hapus {
+      background-color: #e74c3c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 6px 12px;
+      cursor: pointer;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+      border-bottom: 1px solid #ccc;
+    }
+
+    th {
+      background-color: #2980b9;
+      color: white;
+    }
+
+    #productTable td[colspan] {
+      text-align: center;
+      color: #666;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-row">
+      <div class="form-group">
+        <input type="text" id="name" placeholder="Nama Produk">
+      </div>
+      <div class="form-group">
+        <input type="number" id="price" placeholder="Harga (Rp)">
+      </div>
+      <div class="form-group">
+        <input type="number" id="stock" placeholder="Stok">
+      </div>
+      <div class="textarea-group">
+        <textarea id="description" rows="3" placeholder="Deskripsi Produk"></textarea>
+        <button class="btn-tambah" id="submitBtn">Tambah Produk</button>
+      </div>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nama Produk</th>
+        <th>Harga (Rp)</th>
+        <th>Deskripsi</th>
+        <th>Stok</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody id="productTable">
+      <tr><td colspan="6">Tidak ada produk</td></tr>
+    </tbody>
+  </table>
+
+  <script>
+    let products = [];
+    let edit = null;
+
+    function generateId() {
+      if (products.length > 0) {
+        let maxId = 0;
+        for (let i = 0; i < products.length; i++) {
+          if (products[i].id > maxId) {
+            maxId = products[i].id;
+          }
+        }
+        return maxId + 1;
+      } else {
+        return 1;
+      }
+    }
+
+    function renderTable() {
+      let table = document.getElementById('productTable');
+      table.innerHTML = '';
+      if (products.length === 0) {
+        table.innerHTML = '<tr><td colspan="6">Tidak ada produk</td></tr>';
+        return;
+      }
+      products.forEach(product => {
+        table.innerHTML += `
+          <tr>
+            <td>${product.id}</td>
+            <td>${product.name}</td>
+            <td>${product.price.toLocaleString()}</td>
+            <td>${product.description}</td>
+            <td>${product.stock}</td>
+            <td>
+              <button class="btn-edit" onclick="editProduct(${product.id})">Edit</button>
+              <button class="btn-hapus" onclick="deleteProduct(${product.id})">Hapus</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+
+    function resetForm() {
+      document.getElementById('name').value = '';
+      document.getElementById('price').value = '';
+      document.getElementById('stock').value = '';
+      document.getElementById('description').value = '';
+      document.getElementById('submitBtn').innerText = 'Tambah Produk';
+      document.getElementById('submitBtn').className = 'btn-tambah';
+      edit = null;
+    }
+    function addProduct(product) {
+      products.push(product);
+      saveAndRender();
+      resetForm();
+    }
+    
+    function updateProduct(updatedProduct) {
+      products = products.map(p => {
+        if (p.id === updatedProduct.id) {
+          return updatedProduct;
+        } else {
+          return p;
+        }
+      });
+      saveAndRender();
+      resetForm();
+    }
+
+    function deleteProduct(id) {
+      if (confirm("Apakah Anda yakin ingin menghapus produk ini?")) {
+        products = products.filter(p => p.id !== id);
+        saveAndRender();
+      }
+    }
+
+    function editProduct(id) {
+      let product = products.find(p => p.id === id);
+      if (!product) return;
+      edit = id;
+      document.getElementById('name').value = product.name;
+      document.getElementById('price').value = product.price;
+      document.getElementById('stock').value = product.stock;
+      document.getElementById('description').value = product.description;
+      document.getElementById('submitBtn').innerText = 'Update Produk';
+      document.getElementById('submitBtn').className = 'btn-update';
+    }
+
+    function saveAndRender() {
+      localStorage.setItem('products', JSON.stringify(products));
+      renderTable();
+    }
+
+    document.getElementById('submitBtn').addEventListener('click', () => {
+      let name = document.getElementById('name').value.trim();
+      let price = parseInt(document.getElementById('price').value);
+      let stock = parseInt(document.getElementById('stock').value);
+      let description = document.getElementById('description').value.trim();
+
+      if (!name || isNaN(price) || isNaN(stock)) {
+        alert("Mohon isi data dengan benar.");
+        return;
+      }
+
+      if (edit !== null) {
+        updateProduct({ id: edit, name, price, stock, description });
+      } else {
+        addProduct({ id: generateId(), name, price, stock, description });
+      }
+    });
+
+    window.onload = () => {
+      let data = localStorage.getItem('products');
+      if (data) {
+        products = JSON.parse(data);
+      }
+      renderTable();
+    };
+  </script>
+</body>
+</html>
